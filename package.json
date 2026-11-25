@@ -1,0 +1,12 @@
+{
+  "name": "ucc-gasgo",
+  "version": "1.0.0",
+  "description": "Bolt-style Campus LPG Gas Refill & Delivery Platform for University of Cape Coast (UCC), Ghana",
+  "main": "server.js",
+ "scripts": {
+  "start": "node server.js"
+},
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

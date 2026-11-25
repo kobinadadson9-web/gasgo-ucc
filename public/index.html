@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GasGo UCC — Campus LPG Gas Refill &amp; Delivery (University of Cape Coast)</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <!-- Leaflet Interactive Map & Paystack Inline JS -->
+  <link rel="stylesheet" href="https://unpkg.com" />
+  <script src="https://unpkg.com"></script>
+  <script src="https://paystack.co"></script>
+  <style>
+    .portal-switcher-bar {
+      display: flex;
+      gap: 10px;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+    .portal-tab-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: #475569;
+      transition: all 0.2s;
+    }
+    .portal-tab-btn.active {
+      background: #10b981;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.28);
+    }
+    .live-leaflet-map {
+      width: 100%;
+      height: 310px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      z-index: 1;
+    }
+    .star-rating-row {
+      display: flex;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .star-btn {
+      font-size: 1.6rem;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .star-btn.selected {
+      background: #fef3c7;
+      border-color: #f59e0b;
+    }
+    .wallet-topup-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Top Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" id="brandHomeBtn" title="GasGo UCC">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+            <rect x="8" y="9" width="16" height="19" rx="5" fill="#10b981"/>
+            <path d="M12 9V6.5A1.5 1.5 0 0 1 13.5 5h5A1.5 1.5 0 0 1 20 6.5V9" stroke="#10b981" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M16 13.5c2.2 2.4 3.2 4.1 3.2 5.7a3.2 3.2 0 0 1-6.4 0c0-1.6 1-3.3 3.2-5.7Z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">GasGo <span class="ucc-badge">UCC</span></div>
+          <div class="brand-sub">Cape Coast Campus LPG Delivery</div>
+        </div>
+      </div>
+
+      <div class="topbar-meta">
+        <span class="rate-chip" id="liveLpgRateChip">LPG: GH₵ 14.50 / kg</span>
+        <span class="rate-chip hidden" id="activeUserChip">Student: guest@ucc.edu.gh</span>
+        <button type="button" class="staff-login-btn" id="switchPortalBtn">
+          🔐 Switch / Sign Out Portal
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- ==================== 0. DUAL PORTAL LOGIN GATEWAY ==================== -->
+    <section id="view-auth-gateway" class="view-section active">
+      <div class="card" style="max-width: 540px; margin: 24px auto;">
+        <div class="card-header">
+          <div>
+            <h2>Welcome to GasGo UCC</h2>
+            <p class="sub-text">Select your portal below to continue</p>
+          </div>
+        </div>
+
+        <div class="portal-switcher-bar">
+          <button type="button" class="portal-tab-btn active" id="selectStudentPortalBtn">
+            🎓 Student Portal Login
+          </button>
+          <button type="button" class="portal-tab-btn" id="selectRiderPortalBtn">
+            🛵 Rider Portal Login
+          </button>
+        </div>
+
+        <!-- STUDENT FIRST-TIME / RETURNING GMAIL LOGIN -->
+        <form id="studentLoginForm">
+          <div class="form-group">
+            <label for="stuLoginEmail">Student Gmail Address <span class="req">*</span></label>
+            <input type="email" id="stuLoginEmail" placeholder="e.g., kwesi.appiah@gmail.com" required />
+          </div>
+          <div class="form-group">
+            <label for="stuLoginName">Full Name <span class="req">*</span></label>
+            <input type="text" id="stuLoginName" placeholder="e.g., Kwesi Appiah" required />
+          </div>
+          <div class="two-col-inputs">
+            <div class="form-group">
+              <label for="stuLoginPhone">Phone Number (for Rider ID) <span class="req">*</span></label>
+              <input type="tel" id="stuLoginPhone" placeholder="e.g., 024 512 8890" required />
+            </div>
+            <div class="form-group">
+              <label for="stuLoginArea">Your UCC Area <span class="req">*</span></label>
+              <select id="stuLoginArea" required>
+                <option value="Amamoma">Amamoma</option>
+                <option value="Ayensu">Ayensu</option>
+                <option value="Kwaprow">Kwaprow</option>
+                <option value="Apewosika">Apewosika</option>
+                <option value="Valco / Casford / Adehye">Valco / Casford / Adehye</option>
+                <option value="Science / Old Site">Science / Old Site</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-pay-confirm" style="width: 100%; margin-top: 8px;">
+            Enter Student Dashboard →
+          </button>
+        </form>
+
+        <!-- RIDER VERIFIED ID CARD & PLATE LOGIN -->
+        <form id="riderLoginForm" class="hidden">
+          <div class="form-group">
+            <label for="ridLoginName">Rider Full Name <span class="req">*</span></label>
+            <input type="text" id="ridLoginName" placeholder="e.g., Fiifi Mensah" required />
+          </div>
+          <div class="two-col-inputs">
+            <div class="form-group">
+              <label for="ridLoginPhone">Rider Phone / MoMo No. <span class="req">*</span></label>
+              <input type="tel" id="ridLoginPhone" placeholder="e.g., 054 881 2201" required />
+            </div>
+            <div class="form-group">
+              <label for="ridLoginArea">Operating UCC Area <span class="req">*</span></label>
+              <select id="ridLoginArea" required>
+                <option value="Amamoma">Amamoma</option>
+                <option value="Ayensu">Ayensu</option>
+                <option value="Kwaprow">Kwaprow</option>
+                <option value="Apewosika">Apewosika</option>
+                <option value="Main Campus Hostels">Main Campus Hostels</option>
+              </select>
+            </div>
+          </div>
+          <div class="two-col-inputs">
+            <div class="form-group">
+              <label for="ridLoginIdCard">Verified ID Card Number <span class="req">*</span></label>
+              <input type="text" id="ridLoginIdCard" placeholder="e.g., GHA-123456789-0" required />
+            </div>
+            <div class="form-group">
+              <label for="ridLoginPlate">Vehicle Number Plate <span class="req">*</span></label>
+              <input type="text" id="ridLoginPlate" placeholder="e.g., CR 1234-24" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ridLoginVehicleType">Vehicle Type</label>
+            <select id="ridLoginVehicleType">
+              <option value="Motorbike">Motorbike (Okada)</option>
+              <option value="Aboboyaa Tricycle">Aboboyaa Tricycle</option>
+            </select>
+          </div>
+          <div class="auth-error-msg hidden" id="riderLoginErrorBox"></div>
+          <button type="submit" class="btn-pay-confirm" style="width: 100%; margin-top: 8px;">
+            Verify &amp; Enter Rider Portal →
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== 1. STUDENT PORTAL DASHBOARD ==================== -->
+    <section id="view-student" class="view-section hidden">
+      <div class="hero-strip">
+        <div>
+          <h1>Welcome, <span id="studentWelcomeName">Student</span></h1>
+          <p>Verified ID: <strong id="studentProfileSummary">email · phone · area</strong></p>
+        </div>
+        <div class="hero-trust-pills">
+          <span class="trust-pill">✓ Order Any Custom KG</span>
+          <span class="trust-pill">✓ Live Map Rider Tracking</span>
+          <span class="trust-pill">✓ Rate Rider After Delivery</span>
+        </div>
+      </div>
+
+      <div class="student-grid">
+        <!-- LEFT: Request Gas Refill Form -->
+        <div class="card order-builder-card">
+          <div class="card-header">
+            <h2>1. Request Gas Refill (Any KG)</h2>
+            <span class="step-hint" id="perKgHint">Rate: GH₵ 14.50 / kg</span>
+          </div>
+
+          <form id="studentOrderForm">
+            <div class="two-col-inputs">
+              <div class="form-group">
+                <label for="kgAmountInput">Enter Gas Weight (kg) <span class="req">*</span></label>
+                <input type="number" id="kgAmountInput" min="1" max="50" step="0.5" value="6" required />
+                <div class="quick-budget-btns" style="margin-top: 6px;">
+                  <button type="button" class="budget-chip kg-preset" data-kg="3">3 kg</button>
+                  <button type="button" class="budget-chip kg-preset" data-kg="5">5 kg</button>
+                  <button type="button" class="budget-chip kg-preset" data-kg="6">6 kg</button>
+                  <button type="button" class="budget-chip kg-preset" data-kg="12">12 kg</button>
+                  <button type="button" class="budget-chip kg-preset" data-kg="14.5">14.5 kg</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="zoneSelect">Delivery Zone <span class="req">*</span></label>
+                <select id="zoneSelect" required></select>
+              </div>
+            </div>
+
+            <div class="two-col-inputs">
+              <div class="form-group">
+                <label for="hostelNameInput">Hostel Name or Location Name <span class="req">*</span></label>
+                <input type="text" id="hostelNameInput" placeholder="e.g., Baduwa Hostel / Valco Hall" required />
+              </div>
+              <div class="form-group">
+                <label for="roomNumberInput">Room Number <span class="req">*</span></label>
+                <input type="text" id="roomNumberInput" placeholder="e.g., Room 14B" required />
+              </div>
+            </div>
+
+            <div class="two-col-inputs">
+              <div class="form-group">
+                <label for="stationSelect">Preferred Filling Station</label>
+                <select id="stationSelect"></select>
+              </div>
+              <div class="form-group">
+                <label for="speedSelect">Delivery Speed</label>
+                <select id="speedSelect">
+                  <option value="standard">Standard Delivery</option>
+                  <option value="express">Express Direct Bike (+GH₵ 5.00)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cylinderNoteInput">Cylinder Color / Identifying Note (Optional)</label>
+              <input type="text" id="cylinderNoteInput" placeholder="e.g., Blue 6kg cylinder with yellow ribbon" />
+            </div>
+
+            <div class="fare-summary-box">
+              <div class="fare-box-header">
+                <span>Order Cost Breakdown</span>
+                <strong id="summaryTotalDisplay">GH₵ 95.00</strong>
+              </div>
+              <p class="sub-text" id="summaryBreakdownText">6 kg × GH₵ 14.50 = GH₵ 87.00 Gas + GH₵ 8.00 Delivery</p>
+            </div>
+
+            <button type="submit" class="btn-pay-confirm" style="width: 100%; margin-top: 12px;">
+              Place Gas Refill Order →
+            </button>
+          </form>
+        </div>
+
+        <!-- RIGHT: Live Leaflet Map Tracking & Student Order History -->
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div class="card map-card">
+            <div class="map-header">
+              <div>
+                <h3>Live Rider GPS Tracking Map</h3>
+                <p id="mapStatusSubtitle">Place or select an active order to track your rider on the map</p>
+              </div>
+              <span class="distance-pill" id="liveTrackingStatusPill">No Active Ride</span>
+            </div>
+            <div id="studentLeafletMap" class="live-leaflet-map"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2>My Order History</h2>
+                <p class="sub-text">Track active deliveries and rate your rider after drop-off</p>
+              </div>
+              <button type="button" class="btn-dark-sm" id="refreshStudentOrdersBtn">Refresh</button>
+            </div>
+            <div id="studentOrderHistoryList" class="jobs-stack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. RIDER PORTAL DASHBOARD ==================== -->
+    <section id="view-rider" class="view-section hidden">
+      <div class="wallet-topup-banner">
+        <div>
+          <strong style="font-size: 1.05rem;">🛵 <span id="riderHeaderName">Rider</span></strong>
+          <div class="sub-text" id="riderHeaderMeta">ID: GHA-... · Plate: CR ... · Area: ...</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <div class="mini-stat-box">
+            <span class="mini-label">Paystack Top-Up Credit</span>
+            <strong class="mini-val emerald" id="riderCreditBalance">GH₵ 0.00</strong>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <input type="number" id="topupAmountInput" min="2" step="2" value="10" style="width: 85px; padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1;" />
+            <button type="button" class="btn-pay-confirm" id="riderPaystackTopupBtn">
+              + Top Up via Paystack
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="sub-text" style="margin-bottom: 14px;">
+        ℹ️ <strong>GH₵ 2.00</strong> is automatically deducted from your topped-up credit each time you accept a student gas order.
+      </p>
+
+      <div class="rider-columns">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Incoming Student Gas Orders</h2>
+              <p class="sub-text">Requires at least GH₵ 2.00 credit to accept</p>
+            </div>
+            <span class="badge-count" id="availableJobsCount">0 Open</span>
+          </div>
+          <div id="riderAvailableList" class="jobs-stack"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>My Accepted &amp; Active Deliveries</h2>
+              <p class="sub-text">Update delivery stage &amp; broadcast your live map location</p>
+            </div>
+          </div>
+          <div id="riderMyJobsList" class="jobs-stack"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== RATE RIDER MODAL ==================== -->
+  <div class="modal-backdrop hidden" id="rateRiderModalBackdrop">
+    <div class="paystack-modal" role="dialog" aria-modal="true">
+      <div class="paystack-header">
+        <div class="paystack-brand">
+          <span class="lock-badge">⭐</span>
+          <div>
+            <div class="pay-title">Rate Your Delivery Rider</div>
+            <div class="pay-sub" id="rateOrderSubtitle">Order ORD-UCC-...</div>
+          </div>
+        </div>
+        <button type="button" class="close-modal-btn" id="closeRateModalBtn">✕</button>
+      </div>
+
+      <form id="rateRiderForm">
+        <input type="hidden" id="rateOrderIdInput" />
+        <label>Select Star Rating (1 to 5)</label>
+        <div class="star-rating-row" id="starButtonsRow">
+          <button type="button" class="star-btn" data-star="1">1 ★</button>
+          <button type="button" class="star-btn" data-star="2">2 ★</button>
+          <button type="button" class="star-btn" data-star="3">3 ★</button>
+          <button type="button" class="star-btn" data-star="4">4 ★</button>
+          <button type="button" class="star-btn selected" data-star="5">5 ★</button>
+        </div>
+        <div class="form-group">
+          <label for="rateCommentInput">Feedback Comment (Optional)</label>
+          <input type="text" id="rateCommentInput" placeholder="e.g., Fast delivery right to my hostel door!" />
+        </div>
+        <button type="submit" class="btn-pay-confirm" style="width: 100%;">Submit Rating</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

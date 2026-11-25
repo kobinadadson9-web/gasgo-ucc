@@ -1,0 +1,446 @@
+{
+  "security": {
+    "ownerPassword": "uccboss2026",
+    "riderPin": "2222"
+  },
+  "config": {
+    "platformName": "GasGo UCC",
+    "lpgPricePerKg": 15.5,
+    "commissionPercent": 20,
+    "expressSurcharge": 6,
+    "stations": [
+      {
+        "id": "pacific",
+        "name": "Pacific Gas Station (Pedu / East Gate)",
+        "distanceNote": "1.5 km east of UCC",
+        "mapX": 78,
+        "mapY": 44
+      },
+      {
+        "id": "goil_pedu",
+        "name": "GOIL LPG Station (Pedu Junction)",
+        "distanceNote": "2.4 km northeast",
+        "mapX": 84,
+        "mapY": 24
+      },
+      {
+        "id": "allied_elmina",
+        "name": "Allied LPG (Elmina Highway West)",
+        "distanceNote": "2.3 km west of Science",
+        "mapX": 14,
+        "mapY": 64
+      },
+      {
+        "id": "staroil_abura",
+        "name": "StarOil LPG (Abura / Kakumdo Rd)",
+        "distanceNote": "3.2 km north",
+        "mapX": 68,
+        "mapY": 14
+      }
+    ],
+    "cylinders": [
+      {
+        "id": "3kg",
+        "label": "3 kg Camp Cylinder",
+        "kg": 3,
+        "subtitle": "Table-top burner · Freshers"
+      },
+      {
+        "id": "5kg",
+        "label": "5 kg Small Cylinder",
+        "kg": 5,
+        "subtitle": "Single student room"
+      },
+      {
+        "id": "6kg",
+        "label": "6 kg Standard Cylinder",
+        "kg": 6,
+        "subtitle": "Most popular at UCC",
+        "popular": true
+      },
+      {
+        "id": "12kg",
+        "label": "12 kg Medium Cylinder",
+        "kg": 12,
+        "subtitle": "Shared room / 2–3 students"
+      },
+      {
+        "id": "14.5kg",
+        "label": "14.5 kg Large Cylinder",
+        "kg": 14.5,
+        "subtitle": "Homestel / Apartment kitchen"
+      }
+    ],
+    "zones": [
+      {
+        "id": "amamoma",
+        "name": "Amamoma (New Site / Science)",
+        "deliveryFee": 12,
+        "eta": "18–25 mins",
+        "distanceKm": 2.1,
+        "defaultStation": "allied_elmina",
+        "hostels": [
+          "Palace Hostel",
+          "SSNIT Hostel",
+          "Amamoma Plaza",
+          "Science Gate Villa",
+          "Executive Hostel"
+        ],
+        "mapX": 33,
+        "mapY": 55
+      },
+      {
+        "id": "apewosika",
+        "name": "Apewosika (Old Site)",
+        "deliveryFee": 12,
+        "eta": "18–25 mins",
+        "distanceKm": 2,
+        "defaultStation": "pacific",
+        "hostels": [
+          "Apewosika Vegas",
+          "Old Site Annex",
+          "Ocean View Homestel",
+          "Parliament Hostel"
+        ],
+        "mapX": 56,
+        "mapY": 75
+      },
+      {
+        "id": "campus_halls",
+        "name": "UCC Campus Hostels (SRC / PSI / Super.)",
+        "deliveryFee": 14,
+        "eta": "20–28 mins",
+        "distanceKm": 2.5,
+        "defaultStation": "pacific",
+        "hostels": [
+          "SRC Hall",
+          "Superannuation Hall",
+          "PSI Hostel",
+          "Medical Hostel",
+          "Graduate Hostel",
+          "Valco Trust"
+        ],
+        "mapX": 47,
+        "mapY": 50
+      },
+      {
+        "id": "ayensu",
+        "name": "Ayensu Diaspora",
+        "deliveryFee": 15,
+        "eta": "22–30 mins",
+        "distanceKm": 2.9,
+        "defaultStation": "pacific",
+        "hostels": [
+          "Ayensu Plaza",
+          "Baduwa Hostel",
+          "Sterna Hostel",
+          "Oye Inn",
+          "Eddy B Hostel"
+        ],
+        "mapX": 45,
+        "mapY": 29
+      },
+      {
+        "id": "kwaprow",
+        "name": "Kwaprow",
+        "deliveryFee": 16,
+        "eta": "25–35 mins",
+        "distanceKm": 3.5,
+        "defaultStation": "allied_elmina",
+        "hostels": [
+          "Adoration Hostel",
+          "Kwaprow Royal",
+          "Victory Homestel",
+          "Grace Villa Kwaprow"
+        ],
+        "mapX": 24,
+        "mapY": 27
+      },
+      {
+        "id": "akotokyir",
+        "name": "Akotokyir / Ola / Pedu",
+        "deliveryFee": 18,
+        "eta": "25–35 mins",
+        "distanceKm": 3.8,
+        "defaultStation": "goil_pedu",
+        "hostels": [
+          "Akotokyir Hills",
+          "Ola Env. Homestel",
+          "Pedu Estate Annex",
+          "Greenhill Hostel"
+        ],
+        "mapX": 66,
+        "mapY": 33
+      }
+    ]
+  },
+  "riders": [
+    {
+      "id": "rider-1",
+      "name": "Kwame Mensah",
+      "vehicle": "Boxer BM150 Bike · CR-1842-24",
+      "phone": "024 581 9204",
+      "rating": 4.9,
+      "tripsCount": 142,
+      "online": true
+    },
+    {
+      "id": "rider-2",
+      "name": "Kojo Owusu",
+      "vehicle": "Haojue Express Bike · CR-9031-25",
+      "phone": "054 219 7731",
+      "rating": 4.85,
+      "tripsCount": 98,
+      "online": true
+    },
+    {
+      "id": "rider-3",
+      "name": "Yaw Boateng",
+      "vehicle": "Aboboyaa Cargo Tricycle · CR-4410-24",
+      "phone": "050 663 1189",
+      "rating": 4.95,
+      "tripsCount": 215,
+      "online": true
+    },
+    {
+      "id": "rider-1795623287260",
+      "name": "John Osei",
+      "phone": "0505256840",
+      "idCardNumber": "GHA-452136524-3",
+      "vehiclePlate": "GR-5421-22",
+      "vehicle": "Motorbike (GR-5421-22)",
+      "area": "Amamoma",
+      "verified": true,
+      "creditBalanceGhs": 0,
+      "rating": 5,
+      "ratingCount": 0,
+      "tripsCount": 0,
+      "online": true,
+      "createdAt": "2026-11-25T16:14:47.261Z"
+    },
+    {
+      "id": "rider-1795623839495",
+      "name": "John Ofosu",
+      "phone": "0505256840",
+      "idCardNumber": "GHA-721348568-3",
+      "vehiclePlate": "GR-5421-21",
+      "vehicle": "Motorbike (GR-5421-21)",
+      "area": "Amamoma",
+      "verified": true,
+      "creditBalanceGhs": 37,
+      "rating": 5,
+      "ratingCount": 0,
+      "tripsCount": 0,
+      "online": true,
+      "createdAt": "2026-11-25T16:23:59.495Z"
+    },
+    {
+      "id": "rider-1795627135619",
+      "name": "john ofosu",
+      "phone": "0505256840",
+      "idCardNumber": "GHA-5123698425-1",
+      "vehiclePlate": "GR-5426-23",
+      "vehicle": "Motorbike (GR-5426-23)",
+      "area": "Amamoma",
+      "verified": true,
+      "creditBalanceGhs": 2,
+      "rating": 5,
+      "ratingCount": 0,
+      "tripsCount": 0,
+      "online": true,
+      "createdAt": "2026-11-25T17:18:55.619Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-UCC-8044",
+      "createdAt": "2026-11-25T09:42:00Z",
+      "studentName": "Nana Yaw Danso",
+      "studentPhone": "024 908 4512",
+      "zoneId": "campus_halls",
+      "zoneName": "UCC Campus Hostels (SRC / PSI / Super.)",
+      "hostel": "SRC Hall, Block D Room 21",
+      "stationId": "pacific",
+      "stationName": "Pacific Gas Station (Pedu / East Gate)",
+      "cylinderId": "5kg",
+      "cylinderLabel": "5 kg Small Cylinder",
+      "refillMode": "full",
+      "estimatedKg": 5,
+      "cylinderNote": "Blue cylinder with yellow ribbon on handle",
+      "speedTier": "standard",
+      "gasCost": 77.5,
+      "deliveryFee": 14,
+      "totalPaid": 91.5,
+      "commissionPercent": 20,
+      "platformProfit": 2.8,
+      "riderPayout": 11.2,
+      "paymentMethod": "MTN Mobile Money",
+      "paymentRef": "PAY-MOMO-994120",
+      "paymentStatus": "paid",
+      "securityTag": "TAG-519",
+      "deliveryPin": "4829",
+      "status": "searching",
+      "riderId": null,
+      "riderName": null,
+      "riderPhone": null,
+      "riderVehicle": null
+    },
+    {
+      "id": "ORD-UCC-8043",
+      "createdAt": "2026-11-25T08:55:00Z",
+      "studentName": "Esi Mansa",
+      "studentPhone": "050 331 6720",
+      "zoneId": "kwaprow",
+      "zoneName": "Kwaprow",
+      "hostel": "Adoration Hostel, Room 09",
+      "stationId": "allied_elmina",
+      "stationName": "Allied LPG (Elmina Highway West)",
+      "cylinderId": "6kg",
+      "cylinderLabel": "6 kg Standard Cylinder",
+      "refillMode": "custom",
+      "estimatedKg": 3.87,
+      "cylinderNote": "Silver cylinder, flat camp valve",
+      "speedTier": "standard",
+      "gasCost": 60,
+      "deliveryFee": 16,
+      "totalPaid": 76,
+      "commissionPercent": 20,
+      "platformProfit": 3.2,
+      "riderPayout": 12.8,
+      "paymentMethod": "MTN Mobile Money",
+      "paymentRef": "PAY-MOMO-993874",
+      "paymentStatus": "paid",
+      "securityTag": "TAG-412",
+      "deliveryPin": "7310",
+      "status": "delivered",
+      "riderId": "rider-2",
+      "riderName": "Kojo Owusu",
+      "riderPhone": "054 219 7731",
+      "riderVehicle": "Haojue Express Bike · CR-9031-25"
+    },
+    {
+      "id": "ORD-UCC-8042",
+      "createdAt": "2026-11-25T08:10:00Z",
+      "studentName": "Kofi Asante",
+      "studentPhone": "054 892 1044",
+      "zoneId": "amamoma",
+      "zoneName": "Amamoma (New Site / Science)",
+      "hostel": "Palace Hostel, Block C Room 04",
+      "stationId": "allied_elmina",
+      "stationName": "Allied LPG (Elmina Highway West)",
+      "cylinderId": "12kg",
+      "cylinderLabel": "12 kg Medium Cylinder",
+      "refillMode": "full",
+      "estimatedKg": 12,
+      "cylinderNote": "Red GOIL cylinder",
+      "speedTier": "express",
+      "gasCost": 186,
+      "deliveryFee": 18,
+      "totalPaid": 204,
+      "commissionPercent": 20,
+      "platformProfit": 3.6,
+      "riderPayout": 14.4,
+      "paymentMethod": "Telecel Cash",
+      "paymentRef": "PAY-TCASH-993501",
+      "paymentStatus": "paid",
+      "securityTag": "TAG-388",
+      "deliveryPin": "1954",
+      "status": "delivered",
+      "riderId": "rider-3",
+      "riderName": "Yaw Boateng",
+      "riderPhone": "050 663 1189",
+      "riderVehicle": "Aboboyaa Cargo Tricycle · CR-4410-24"
+    },
+    {
+      "id": "ORD-UCC-8041",
+      "createdAt": "2026-11-25T07:30:00Z",
+      "studentName": "Ama Serwaa",
+      "studentPhone": "024 712 3390",
+      "zoneId": "ayensu",
+      "zoneName": "Ayensu Diaspora",
+      "hostel": "Baduwa Hostel, Room 12B",
+      "stationId": "pacific",
+      "stationName": "Pacific Gas Station (Pedu / East Gate)",
+      "cylinderId": "6kg",
+      "cylinderLabel": "6 kg Standard Cylinder",
+      "refillMode": "full",
+      "estimatedKg": 6,
+      "cylinderNote": "Dark green cylinder with white chalk 'AS'",
+      "speedTier": "standard",
+      "gasCost": 93,
+      "deliveryFee": 15,
+      "totalPaid": 108,
+      "commissionPercent": 20,
+      "platformProfit": 3,
+      "riderPayout": 12,
+      "paymentMethod": "MTN Mobile Money",
+      "paymentRef": "PAY-MOMO-993112",
+      "paymentStatus": "paid",
+      "securityTag": "TAG-304",
+      "deliveryPin": "6621",
+      "status": "delivered",
+      "riderId": "rider-1",
+      "riderName": "Kwame Mensah",
+      "riderPhone": "024 581 9204",
+      "riderVehicle": "Boxer BM150 Bike · CR-1842-24"
+    }
+  ],
+  "students": [],
+  "walletTransactions": [
+    {
+      "id": "wtx-1795627144346",
+      "riderId": "rider-1795627135619",
+      "riderName": "john ofosu",
+      "type": "topup",
+      "amountGhs": 2,
+      "balanceAfterGhs": 2,
+      "reference": "LOCAL-TEST-rider-1795627135619-1795627144320",
+      "channel": "paystack",
+      "createdAt": "2026-11-25T17:19:04.347Z"
+    },
+    {
+      "id": "wtx-1795626914492",
+      "riderId": "rider-1795623839495",
+      "riderName": "John Ofosu",
+      "type": "topup",
+      "amountGhs": 5,
+      "balanceAfterGhs": 37,
+      "reference": "LOCAL-TEST-rider-1795623839495-1795626914469",
+      "channel": "paystack",
+      "createdAt": "2026-11-25T17:15:14.492Z"
+    },
+    {
+      "id": "wtx-1795626733102",
+      "riderId": "rider-1795623839495",
+      "riderName": "John Ofosu",
+      "type": "topup",
+      "amountGhs": 20,
+      "balanceAfterGhs": 32,
+      "reference": "LOCAL-TEST-rider-1795623839495-1795626733107",
+      "channel": "paystack",
+      "createdAt": "2026-11-25T17:12:13.102Z"
+    },
+    {
+      "id": "wtx-1795626709187",
+      "riderId": "rider-1795623839495",
+      "riderName": "John Ofosu",
+      "type": "topup",
+      "amountGhs": 10,
+      "balanceAfterGhs": 12,
+      "reference": "LOCAL-TEST-rider-1795623839495-1795626709174",
+      "channel": "paystack",
+      "createdAt": "2026-11-25T17:11:49.187Z"
+    },
+    {
+      "id": "wtx-1795626690782",
+      "riderId": "rider-1795623839495",
+      "riderName": "John Ofosu",
+      "type": "topup",
+      "amountGhs": 2,
+      "balanceAfterGhs": 2,
+      "reference": "LOCAL-TEST-rider-1795623839495-1795626690754",
+      "channel": "paystack",
+      "createdAt": "2026-11-25T17:11:30.782Z"
+    }
+  ]
+}
